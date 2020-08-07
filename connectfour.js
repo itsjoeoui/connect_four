@@ -67,6 +67,17 @@ function diagonalWinCheck() {
     }
 }
 
+function fullBoardCheck() {
+    for (row = 0; row<=5; row++) {
+        for (column = 0; column <=6; column++) {
+            if (returnColor(row, column) === "rgb(128, 128, 128)") {
+                return false
+            }
+        }
+    }
+    return true
+}
+
 $('button').on('click', function() {
     var col = $(this).closest("td").index()
     // console.log(checkBottom(col))
@@ -80,6 +91,10 @@ $('button').on('click', function() {
             }
             $('h2').text('You can refresh the page to play again!')
             $('button').off('click')
+        } else if (fullBoardCheck()) {
+            $('h3').text('You two tied!')
+            $('h2').text('You can refresh the page to play again!')
+            $('button').off('click') 
         } else {
             if (playerMarker === player1color) {
                 playerMarker = player2color
